@@ -1,8 +1,8 @@
-Flutter API Integration App 🚀
+#Flutter API Integration App 🚀
 
 A Flutter application that integrates REST APIs using Provider for state management and SharedPreferences for storing the access token.
 
-📱 Screens
+#📱 Screens
 Splash Screen
 Login Screen
 Home Screen
@@ -28,7 +28,7 @@ When the app starts:
 Splash Screen checks for the access token.
 If the token exists → Home Screen
 If the token does not exist → Login Screen
-🛠️ Technologies Used
+#🛠️ Technologies Used
 Flutter
 Dart
 REST APIs
