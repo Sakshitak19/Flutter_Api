@@ -1,3 +1,4 @@
+import 'package:api/splash.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,8 +10,18 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: Center(
-        child: Text('Welcome to the Home Page!',style: TextStyle(fontSize:24, fontWeight: FontWeight.bold),),
+      body: Column(
+        children: [
+           Text('Welcome to the Home Page!',style: TextStyle(fontSize:24, fontWeight: FontWeight.bold),),
+
+           ElevatedButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashScreen()),
+            );
+           }, child: Text("Back"),
+           ),
+
+
+        ],
       ),
     );
   }

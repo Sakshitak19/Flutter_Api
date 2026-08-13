@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'footer.dart';
+import 'package:provider/provider.dart';
+import 'providers/login_provider.dart';
+import 'providers/user_provider.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -17,33 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  loginApi()async{
-    final response = await http.post(Uri.parse('http://dummyjson.com/auth/login'),body:{
-      'username': nameController.text,
-      'password': passwordController.text,
-     
-    });
-
-    if(response.statusCode==200){
-      setState(() {
-        message="";
-        
-      });
-      
-       Navigator.push(
-        context, 
-        MaterialPageRoute(
-          builder: (context)=>FooterPage(),
-       ),
-       );
-     
-    }else{
-      setState((){
-        message = "Login failed";
-      });
-    }
-  }
-    
 
    
   @override
@@ -93,16 +68,42 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const SizedBox(height: 20),
 
-          ElevatedButton(
-            onPressed: (){
+
+          
+        Consumer<LoginProvider>(
+          builder: (context,loginProvider,child){
+            return ElevatedButton(onPressed: 
+            loginProvider.isLoading ? null :()async{
               if(_formKey.currentState!.validate()){
-                loginApi();
+                final success = await loginProvider.login(nameController.text,
+                passwordController.text,);
+
+                if(success && context.mounted){
+                 
+  await Provider.of<UserProvider>(
+    context,
+    listen: false,
+  ).getCurrentUser();
+
+  if (context.mounted) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const FooterPage(),
+      ),
+    );
+  }
+}
               }
-            },
-            child: const Text("Login"),
-          ),
-          const SizedBox(height: 20),
-          Text(message,style:TextStyle(color: Colors.red,fontSize: 20),
+              },
+             
+           
+            child: loginProvider.isLoading
+            ? const CircularProgressIndicator():
+            const Text("Login"),
+            );
+          },
+        
           ),
 
          // Image.network("https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTExL3JtNTUxLTExLW1hY2Jvb2stMTFhLnBuZw.png"),
