@@ -1,17 +1,37 @@
-# api
+Flutter API Integration App 🚀
 
-A new Flutter project.
+A Flutter application that integrates REST APIs using Provider for state management and SharedPreferences for storing the access token.
 
-## Getting Started
+📱 Screens
+Splash Screen
+Login Screen
+Home Screen
+Products Screen
+Product Details Screen
+Cart Screen
+Profile Screen
+✨ Features
+REST API integration
+Login with API
+Access token management
+Token storage using SharedPreferences
+Automatic navigation from Splash Screen
+Provider for state management
+Dynamic product data
+Product details
+Add to Cart functionality
+Profile screen
+🔐 Authentication Flow
 
-This project is a starting point for a Flutter application.
+When the app starts:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Splash Screen checks for the access token.
+If the token exists → Home Screen
+If the token does not exist → Login Screen
+🛠️ Technologies Used
+Flutter
+Dart
+REST APIs
+Provider
+SharedPreferences
+HTTP
